@@ -21,7 +21,10 @@
 ![alt text](image2.png)
 </br>
 
-- UCS(Uniform Cost Search):数据结构使用的是**heap**，思想为**dijkstra算法**，其时间复杂度和空间复杂度均为**O(b<sup>C*/ε</sup>）</sup>**。
+- UCS(Uniform Cost Search):数据结构使用的是**heap**，思想为**dijkstra算法**，在二维空间中呈现的是一种**向四周散开**的扩散方式，例如：
+![alt text](image6.png)  
+</br>
+- 其时间复杂度和空间复杂度均为**O(b<sup>C*/ε</sup>）</sup>**。
 ![alt text](image3.png)
 - 对于其时间复杂度和空间复杂度进行补充：
-  ![alt text](image4.png)
+![alt text](image4.png)
