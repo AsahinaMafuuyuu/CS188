@@ -38,3 +38,12 @@ A *搜索的例子：
 
 于是：
 ![alt text](image14.png)
+
+
+
+
+
+
+
+
+$V^{\boldsymbol{\pi}}(s)=\sum_{s^{\prime}}T(s,\boldsymbol{\pi}(s),s^{\prime})[R(s,\boldsymbol{\pi}(s),s^{\prime})+\boldsymbol{\gamma}V^{\boldsymbol{\pi}}(s^{\prime})]$
