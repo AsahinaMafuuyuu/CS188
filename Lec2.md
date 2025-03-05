@@ -14,17 +14,17 @@
 - 在该**数据结构**中存入我们此时所遍历的**节点**，并且判断该节点是否为所要搜寻的目标节点，如果是，返回该节点
 ## 4.树的三种搜索方式：
 - DFS：使用的是**后入先出**的数据结构，即stack，但是对于味无穷树而言，可能会存在无限循环的情况，且其时间复杂度和空间复杂度均为**O(b<sup>m</sup>)**。
-![alt text](image1.png)
+![alt text](./img/image1.png)
 </br>
 
 - BFS:对于广度搜索树方式而言，使用的是**先入先出**的数据结构，即Queue，对于最优搜索方式而言，它通常不是最优的，且其复杂度为**O(b<sup>s</sup>)**。
-![alt text](image2.png)
+![alt text](./img/./img/image2.png)
 </br>
 
 - UCS(Uniform Cost Search):数据结构使用的是**heap**，思想为**dijkstra算法**，在二维空间中呈现的是一种**向四周散开**的扩散方式，例如：
-![alt text](image6.png)  
+![alt text](./img/image6.png)  
 </br>
 - 其时间复杂度和空间复杂度均为**O(b<sup>C*/ε</sup>）</sup>**。
-![alt text](image3.png)
+![alt text](./img/image3.png)
 - 对于其时间复杂度和空间复杂度进行补充：
-![alt text](image4.png)
+![alt text](./img/image4.png)

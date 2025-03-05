@@ -3,7 +3,7 @@
 #### 给定当前状态，未来和过去则是独立的
 #### 行动结果仅取决于当前状态 
 放置代理的环境可能使代理的行为具有不确定性，这意味着在某些状态下采取的操作可能导致多种可能的后续状态。
-![alt text](image-7.png)
+![alt text](./img/image-7.png)
 即$T(s,a,s^{\prime})=P(s^{\prime}|s,a)$
 ## 1. 马尔可夫决策过程（Markov Decision Processes）
 马尔可夫决策过程定义如下：  
@@ -55,40 +55,40 @@ $\forall s,U_{k+1}(s)=U_k(s).$它的运作方式如下：
 > **在值迭代的第k次迭代中，我们对每个状态使用极限k的限时值来生成极限（k +1）的限时值。**
 
 现用一个例子来加以说明：
-![alt text](image-8.png)
+![alt text](./img/image-8.png)
 我们通过初始化所有U0(s) = 0开始值迭代：
 |  |cool|heat|overheated|
 |:--|:--:|:--:|:--:|
 |U<sub>0</sub>|0|0|0|
 
 第一轮迭代中，可以这样表示：
-    ![alt text](image-9.png)
+    ![alt text](./img/image-9.png)
 同样的，我们可以重复该过程继续迭代：
-![alt text](image-10.png)
-![alt text](image-11.png)
+![alt text](./img/image-10.png)
+![alt text](./img/image-11.png)
 值得注意的是，**任何终端状态的U * (s)都必须为0，因为任何终端状态都不可能采取任何行动来获得任何奖励**
 ### 1.4 原理
 通过贝尔曼方程可以很清楚的得知：对于解决MDP问题而言，最终目标是找到最优策略，如果处于s态，要想达到最优策略，则应该采取产生最优行动a，即：
 $\max_a\sum_{s^\prime}T(s,a,s^\prime)[R(s,a,s^\prime)+\gamma U^*(s^\prime)]$
 ## 2. 策略提取
 策略提取的思想就是：当我们处于s状态的时候，则应该采取产生最大预期作用的操作a，即：a是使我们达到q值最大的q-state的行为，定义为：
-![alt text](image-12.png)
+![alt text](./img/image-12.png)
 最优策略
-![alt text](image-13.png)
+![alt text](./img/image-13.png)
 "argmax" 是一个数学符号，表示“使得某个函数最大化的变量”的意思。
 ### 2.1 Q-Value迭代
 在使用值迭代求解最优策略时，首先找到所有最优值，然后使用策略提取方法提取策略。
 q值迭代是一种计算有时间限制的q值的动态规划算法，用法如下：
-![alt text](image-14.png)
+![alt text](./img/image-14.png)
 ### 2.2 策略迭代
 值迭代较慢，但是策略迭代能够在保持值迭代最优性的前提下还能够提升速度，操作如下:
 1. 定义一个**任意的**初始策略，若迭代收敛得越快则证明初始策略越接近最终的最优策略。
 2. 重复以下步骤直到收敛：
    > - 用策略评估来评估当前的策略，对于一个策略Π，策略评估意味着计算所有状态s的U<SUP>Π</SUP>(s),其中U<SUP>Π</SUP>(s)是从状态s开始的期望效用：
-   ![alt text](image-15.png)
-   定义策略迭代第i次迭代时的策略为Π<sub>i</sub>,我们也可以像值迭代一样，用以下更新规则计算U<sup>π</sup><sub>i</sub>(s)，直到收敛：![alt text](image-16.png)
+   ![alt text](./img/image-15.png)
+   定义策略迭代第i次迭代时的策略为Π<sub>i</sub>,我们也可以像值迭代一样，用以下更新规则计算U<sup>π</sup><sub>i</sub>(s)，直到收敛：![alt text](./img/image-16.png)
    > - 一旦我们评估了当前策略，使用**策略改进**来产生更好的策略：
-   ![alt text](image-17.png)
+   ![alt text](./img/image-17.png)
    当π<sub>i+1</sub>=π<sub>i</sub>时，该算法收敛，我们可以得出π<sub>i+1</sub>=π<sub>i</sub>=π*。
 
 例如：我们从初始策略slow开始（初始策略随便取得，只是会影响收敛的快慢）：
@@ -97,15 +97,15 @@ q值迭代是一种计算有时间限制的q值的动态规划算法，用法如
 |Π<sub>0</sub>|slow|slow|-|
 
 下一步是在Π<sub>0</sub>上进行一轮的策略评估：
-![alt text](image-18.png)
+![alt text](./img/image-18.png)
 解得方程为：
-![alt text](image-19.png)
+![alt text](./img/image-19.png)
 再进行策略提取：
-![alt text](image-20.png)
+![alt text](./img/image-20.png)
 第二轮运行得到：
-![alt text](image-21.png)
+![alt text](./img/image-21.png)
 这与第一轮Π<sub>1</sub>是相同的策略，我们可以得出Π<sub>1</sub>=Π<sub>2</sub>=Π*
-![alt text](image-22.png)
+![alt text](./img/image-22.png)
 ## 3. conclusion
 - 值迭代：用于计算状态最优值，通过更新迭代来达到收敛。
 - 策略评估：用于计算特定策略下的状态值。

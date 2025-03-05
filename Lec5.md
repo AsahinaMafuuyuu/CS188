@@ -9,10 +9,10 @@
 ## 2. 结构（Structure）
 > - 首先在约束图中选择任意一个节点为树的根节点。
 > - 将树中所有无向边转化成远离根节点的有向边。
-> > 例如：![alt text](image17.png)
+> > 例如：![alt text](./img/image17.png)
 > - 执行弧的一致**后传递**
 > > 例如：根据MRC和LCV选择C为变量，然后再对C进行后传递：
-> >![alt text](image18.png)
+> >![alt text](./img/image18.png)
 
 树的结构算法可以推广到具**切集**条件的CSP，先找到约束图中最小的的变量子集（也就是受到约束条件最多的）
 
@@ -22,17 +22,17 @@
 > 1.选择最大冲突变量。
 > 2. 选择最少冲突启发值（即选择违背约束最少的值）
 > 例如：
-> >![alt text](image19.png)   
+> >![alt text](./img/image19.png)   
 
 ### 3.1 爬山算法（Hill-Climbing Search）
 1. 任意地方开始
 2. （重复）移动到最优邻近状态出  
 3.  如果没有，退出
 伪代码如下：
-![alt text](image20.png)
+![alt text](./img/image20.png)
 ### 3.2 模拟退火搜索（Simulated Annealing Search）
 &nbsp;&nbsp;&nbsp;&nbsp;原理：算法在每个状态下选择随机移动。如果这一举动导致更高的目标，它总是被接受的。另一方面，如果它导致更小的目标，那么这一行动就有一定的可能性被接受。**通过允许下坡移动来避免局部最大值，但随着时间的推移使其变得更少**。
 伪代码如下：
-![alt text](image21.png)
+![alt text](./img/image21.png)
 ### 3.3 遗传算法（Genetic Algorithms）
 

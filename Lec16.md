@@ -12,36 +12,36 @@
 我们的目标是使用这些训练数据，来学习某种关系，如何构建一种用于解决分类问题的模型，称为朴素贝叶斯分类器
 从数据集中提取**特征**，决定使用哪些**特征**也称为特征工程，也是激起学习的基础f(x)为特征函数。
 通过已知特征的前提下，我们可以得到对应的概率：
-![alt text](image-170.png)
+![alt text](./img/image-170.png)
 例如：
-![alt text](image-171.png)
+![alt text](./img/image-171.png)
 给定Y，每个Fi都有条件独立于所有其他Fi。
 如果用bayes网络来表示的话，（假设Fi有0或1两种情况，Y也有两种情况）P(Fi|Y)总共有4种可能，而总共有N个特征，因此是4n，再加上P(Y)的两个条目，总共是4n+2，为线性存储空间。
-![alt text](image-172.png)
+![alt text](./img/image-172.png)
 由于
-![alt text](image-174.png)
+![alt text](./img/image-174.png)
 与
-![alt text](image-175.png)
+![alt text](./img/image-175.png)
 成比例，因此我们可以计算：
-![alt text](image-173.png)
+![alt text](./img/image-173.png)
 #### 2.1.2 参数估计
 首先回顾似然函数：
 **在已知结果的情况下，该事件在不同条件下发生的可能性**，也就是从结果推测条件（这正好符合我们对于机器学习的认知：**通过给定的数据来推测出具体的模型**）
 最大似然估计通常做以下简化假设：·每个样本都来自相同的分布，换句话说，每个xi都是同分布的。
 对于似然函数L(θ)：
 1. 对于固定样本X1,X2,...,Xn，**似然函数只是θ的函数**
-   ![alt text](image-176.png)
+   ![alt text](./img/image-176.png)
 2. 若样本是独立同分布，则：
-   ![alt text](image-177.png)
+   ![alt text](./img/image-177.png)
 我们怎样才能找到使这个函数最大化的θ值呢？这将是最好地解释我们看到的数据的θ值。回想微积分，在函数的最大值和最小值实现的点处，它相对于每个输入的一阶导数（也称为函数的梯度）必须等于零。因此，θ的最大似然估计值是满足以下等式的值：
-![alt text](image-178.png)
+![alt text](./img/image-178.png)
  以下是一个例子：
  > 假设你有一个装满红色和蓝色球的袋子，不知道每种球有多少个。你从袋子里拿出一个球，注意颜色，然后把球放回去（替换取样）。从这个袋子里抽出三个球的样品，得到红色，红色，蓝色。这似乎意味着我们应该推断袋子里有2/3个球是红色的，1/3个球是蓝色的。**我们假设每个从袋子里拿出来的球都是红色的概率为θ，蓝色的概率为1-θ，对于我们想要估计的某个值θ（这被称为伯努利分布）**：
- ![alt text](image-179.png)
+ ![alt text](./img/image-179.png)
  我们的样本的可能性是：
- ![alt text](image-180.png)
+ ![alt text](./img/image-180.png)
  最后一步是将似然的导数设置为0并求解θ：
- ![alt text](image-181.png)
+ ![alt text](./img/image-181.png)
 
  > 现如下再举一个例子：
  让我们回到为垃圾邮件分类器推断条件概率表的问题：
@@ -52,24 +52,24 @@
  > - f<sub>i</sub><sup>(j)</sup>：这引用了训练集中第j个项目中随机变量Fi的解析值。换句话说，如果单词i出现在所考虑的第j封电子邮件中，则每个f<sub>i</sub><sup>(j)</sup>为1，否则为0。
 
 > 让我们考虑P（Fi| Y = ham），则：
-> ![alt text](image-182.png)
+> ![alt text](./img/image-182.png)
 > 则公式推导如下：
-> ![alt text](image-183.png)
-> ![alt text](image-184.png)
-> ![alt text](image-185.png)
+> ![alt text](./img/image-183.png)
+> ![alt text](./img/image-184.png)
+> ![alt text](./img/image-185.png)
 
 #### 2.2 Smoothing
-![alt text](image-190.png)
+![alt text](./img/image-190.png)
 虽然最大似然估计是一种非常强大的参数估计方法，但糟糕的训练数据往往会导致不幸的后果。使用朴素贝叶斯分类器的过拟合可以通过拉普拉斯平滑来减轻。强度为k的拉普拉斯平滑假设每个结果都有k个额外的结果。
 以下式子表明了**最大似然估计**的另外一种计算方法：
-![alt text](image-186.png)
+![alt text](./img/image-186.png)
 则强度为K的拉普拉斯估计为：
-![alt text](image-187.png)
-![alt text](image-189.png)
+![alt text](./img/image-187.png)
+![alt text](./img/image-189.png)
 **比如：该案例中每个实例均有两种可能：{收到正常邮件，收到垃圾邮件}，则|x|=2**
 扩展该式，可得：
-![alt text](image-188.png)
+![alt text](./img/image-188.png)
 > 对于拉普拉斯平滑而言：
 > - 当k=0时，拉普拉斯平滑就退化成了最大似然估计。
 > - 当k=∞时，观察每个结果的数量非常大，无限大，使得实际样本的结果无关紧要，因此您的拉普拉斯估计值意味着每个结果的可能性相等。：
-> > ![alt text](image-191.png)
+> > ![alt text](./img/image-191.png)

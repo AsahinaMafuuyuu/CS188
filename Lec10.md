@@ -1,24 +1,24 @@
 # 条件独立性
 ## 1 因果链
-![alt text](image-56.png)
+![alt text](./img/image-56.png)
 对于这样一个因果链，x与z**不一定**是相互独立的，例如：
 > X：低压Y：雨Z：交通
 > **低压导致降雨会导致交通，高压导致无雨不会导致没有交通**
 
 因此x和z并不是相互独立的，但是**在Y已知的条件下**，X和Z是相互独立的。
-![alt text](image-57.png)
+![alt text](./img/image-57.png)
 即
-![alt text](image-60.png)
+![alt text](./img/image-60.png)
 ## 2 共同原因
-![alt text](image-59.png)
+![alt text](./img/image-59.png)
 它表示为：
-![alt text](image-64.png)
+![alt text](./img/image-64.png)
 这个也无法保证X独立于Z，也是只能在Y的条件下相互独立；
-![alt text](image-61.png)
+![alt text](./img/image-61.png)
 ## 3 共同影响
-![alt text](image-62.png)
+![alt text](./img/image-62.png)
 它表示为：
-![alt text](image-63.png)
+![alt text](./img/image-63.png)
 如果**Y未被检测到(即不建立在Y已知的条件下)**，那么x和z是相互独立的，但是如果**Y被检测到（即建立在Y已知的条件下）**，那么X和Z不是相互独立的。
 ## 4 D-separate-Algorithm
 该算法用来分析两个变量之间是否独立，具体操作如下：
@@ -30,7 +30,7 @@
 > > b. 如果三元组都是**active**的，则该路径也是**active**的，并且记作**d连接**。
 > 4. 如果X和Y中没有**d连接**，则X和Y就是**d分离**，因此给定{Z1,Z2,...,Zk}，它们是相互独立的。
 > 注：**active**元组就是上述讨论的三元组的三种情况中的一种。
-> ![alt text](image-65.png)
+> ![alt text](./img/image-65.png)
 
 
 
