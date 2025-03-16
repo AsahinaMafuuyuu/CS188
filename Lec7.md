@@ -35,6 +35,7 @@ $$\begin{aligned}U([s_0,s_1,s_2,...])&=\quad R(s_0,a_0,s_1)+\gamma R(s_1,a_1,s_2
 $U^*(s)=\max_a\sum_{s^\prime}T(s,a,s^\prime)[R(s,a,s^\prime)+\gamma U^*(s^\prime)]$
 
 定义Q<sup>*</sup>(s,a)如下:
+**Q-State** 不是估计最大可能性的行动，而是估计特定行动的长期回报。
 
 $Q^*(s,a)=\sum_{s^{\prime}}T(s,a,s^{\prime})[R(s,a,s^{\prime})+\boldsymbol{\gamma}U^*(s^{\prime})]$
 
@@ -54,11 +55,107 @@ $\forall s,U_{k+1}(s)=U_k(s).$它的运作方式如下：
 > $\forall s\in S,U_{k+1}(s)\leftarrow\max_a\sum_{s^{\prime}}T(s,a,s^{\prime})[R(s,a,s^{\prime})+\gamma U_k(s^{\prime})]$
 > **在值迭代的第k次迭代中，我们对每个状态使用极限k的限时值来生成极限（k +1）的限时值。**
 
+如果是图的话，可以这样理解：
+> - 首先我们定义一个图表，其中的所有状态的初始值全都初始化为0；
+> - 设置一个迭代次数，` for _ in range(self.iterations): `
+> - 然后开始迭代所有的状态：`for state in self.mdp.getStates():`
+> - 对于每个状态，我们用这个公式进行迭代: $\forall s\in S,U_{k+1}(s)\leftarrow\max_a\sum_{s^{\prime}}T(s,a,s^{\prime})[R(s,a,s^{\prime})+\gamma U_k(s^{\prime})]$ 
+> - 即计算Q-State的最大值，然后进行迭代：
+> - 计算Q-State的时候，需要一开始用self.values(state)来代替Q-State(state,action)，`Q_Val+=transition_prob*(reward_Val+self.discount*self.values[nextState])`
+> - 由于一开始将self.values(state)全部设置为0，这样的话能够保证我们不会一直递归出现超出递归最大可能数，具体代码如下：
+```python
+ def runValueIteration(self):
+
+        """
+
+          Run the value iteration algorithm. Note that in standard
+
+          value iteration, V_k+1(...) depends on V_k(...)'s.
+
+        """
+
+        "*** YOUR CODE HERE ***"
+
+        print(self.mdp.getStates())
+
+        # 迭代更新所有的状态
+
+        for _ in range(self.iterations):
+
+            temporary_dict=util.Counter()
+
+            # 一个字典，用来存放所有对应的状态
+
+            for state in self.mdp.getStates():# iter all state and update everyState
+
+                if self.mdp.isTerminal(state):
+
+                    temporary_dict[state]=0
+
+                else:
+
+                    max_action_Score=float('-inf')
+
+                    for action in self.mdp.getPossibleActions(state):
+
+                        action_Score=self.computeQValueFromValues(state,action)
+
+                        if action_Score > max_action_Score:
+
+                            max_action_Score=action_Score
+
+                    temporary_dict[state]=max_action_Score
+
+            self.values=temporary_dict
+
+  
+
+    def getValue(self, state):
+
+        """
+
+          Return the value of the state (computed in __init__).
+
+        """
+
+        return self.values[state]
+
+  
+
+    def computeQValueFromValues(self, state, action):
+
+        """
+
+          Compute the Q-value of action in state from the
+
+          value function stored in self.values.
+
+        """
+
+        "*** YOUR CODE HERE ***"
+
+        Q_Val=0
+
+        state_transition=self.mdp.getTransitionStatesAndProbs(state, action)
+
+        for u in range(len(state_transition)):
+
+            nextState=state_transition[u][0]
+
+            transition_prob=state_transition[u][1]
+
+            reward_Val=self.mdp.getReward(state, action, nextState)
+
+            Q_Val+=transition_prob*(reward_Val+self.discount*self.values[nextState])
+
+        return Q_Val
+  
+```
 现用一个例子来加以说明：
 ![alt text](./img/image-8.png)
 我们通过初始化所有U0(s) = 0开始值迭代：
-|  |cool|heat|overheated|
-|:--|:--:|:--:|:--:|
+|cool|heat|overheated|
+|:--:|:--:|:--:|:--:|
 |U<sub>0</sub>|0|0|0|
 
 第一轮迭代中，可以这样表示：
@@ -92,9 +189,11 @@ q值迭代是一种计算有时间限制的q值的动态规划算法，用法如
    当π<sub>i+1</sub>=π<sub>i</sub>时，该算法收敛，我们可以得出π<sub>i+1</sub>=π<sub>i</sub>=π*。
 
 例如：我们从初始策略slow开始（初始策略随便取得，只是会影响收敛的快慢）：
-| |cool|warm|overheated|
-|:--:|:--:|:--:|:--:|
-|Π<sub>0</sub>|slow|slow|-|
+
+|               | cool     | warm     | overheated |
+| ------------- | -------- | -------- | ---------- |
+| Π<sub>0</sub> | slow<br> | slow<br> | -<br>      |
+
 
 下一步是在Π<sub>0</sub>上进行一轮的策略评估：
 ![alt text](./img/image-18.png)

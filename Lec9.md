@@ -8,7 +8,7 @@
 首先来讲一下链式分解：
 对于k个变量而言，其发生的概率为：
 ![alt text](./img/image-46.png)
-这个无论是否独立均成立
+**这个无论是否独立均成立**
 而当条件独立的时候(例如A<SUB>2</SUB>和A<SUB>3</SUB>独立的时候)，则有：
 P(A<SUB>1</SUB>,A<SUB>2</SUB>,A<SUB>3</SUB>)=P(A<SUB>1</SUB>)·P(A<SUB>2</SUB>|A<SUB>1</SUB>)·P(A<SUB>3</SUB>|A<SUB>1</SUB>,A<SUB>2</SUB>)
 其中P(A<SUB>3</SUB>|A<SUB>1</SUB>,A<SUB>2</SUB>)=P(A<SUB>3</SUB>|A<SUB>1</SUB>)
